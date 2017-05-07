@@ -17,6 +17,9 @@ function sponsor_form_review() {
 		echo $output;
 	}
 }
+function testing() {
+	echo "blah";
+}
 
 sponsor_form_review();
 // lk;dsaf;ljdsa;lfldsa
