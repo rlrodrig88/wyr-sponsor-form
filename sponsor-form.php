@@ -6,7 +6,6 @@ Description: Sponsorship form for bike racks
 Version: 1.0
 Author: Ronnie Rodriguez
 */
-//asjdf;jasdk;lj;alsdjfkajdjs
 
 // Set up session
 add_action('init', 'start_session', 1);
