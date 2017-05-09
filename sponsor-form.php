@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WYR Sponsor Form Plugin
-Plugin URI: http://example.com
-Description: Sponsorship form for bike racks
+Plugin URI: https://github.com/rlrodrig88/wyr-sponsor-form
+Description: Sponsorship form for bike racks.  Creates and sends a PDF of the completed form via email for notification.  Allows for mailed checks or credit card payment.
 Version: 1.0
 Author: Ronnie Rodriguez
 */
 
-// Set up session
+// Set up session 
 add_action('init', 'start_session', 1);
 add_action('wp_logout', 'end_session');
 add_action('wp_login', 'end_session');
@@ -23,42 +23,59 @@ function start_session() {
 	}
 }
 
-//  Page information begins here
-
+/* Page information begins here
+*
+*  Display sponsor form
+*/
 function sponsor_form() {
 	$output = 
-	'<form action="../review.php" method="post">
+	'<form action="" method="post">
 	<p>Your Name (required) <br/>
-	<input type="text" name="cf-name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["cf-name"] ) ? esc_attr( $_POST["cf-name"] ) : '' ) . '" size="40" /></p>
-	<input type="submit" name="cf-submitted" value="Next" >
+	<input type="text" name="first-name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["first-name"] ) ? esc_attr( $_POST["first-name"] ) : '' ) . '" size="40" /></p>
+	<input type="submit" name="form-submit" value="Next" >
 	</form>';
-//	if(isset($_POST['cf-submitted'])) { 
-//			sponsor_form_review();
-//		} else {
-//			echo $output;
-//	}
-}
-
-function sponsor_form_review() {
-	$output = 
-	'<p>This is page 2!<br/>
-	<form action="' . esc_url_raw( $_SERVER['REQUEST_URI'] ) . '" method="post">
-	<input type="submit" name="back" id="back" value="Back" />
-	<input type="submit" name="next" id="next" value="Next" />
-	</form>';
-	//if(isset($_POST["back"])) { 
-	//	sponsor_form();
-	//} else 
-	if(isset($_POST["next"])) { 
-		echo "kzlxjvpoaijrewj";
-	//	sponsor_form_payment();
+	if(isset($_POST["form-submit"])) { 
+		// create an array of all $_POST variables
+		$_SESSION['post-data'] = $_POST;
+		// review user input
+		sponsor_form_review();
+		//sponsor_form_payment_check();
+	} else if(isset($_POST['review'])) { 
+		sponsor_form_payment_check();
 	} else {
-		echo $output;
+			echo $output;
 	}
 }
 
-function sponsor_form_payment() {
-	$output = 'This is page 3!';
+// Let user review the completed form
+function sponsor_form_review() {
+	$output = 
+	'<p>This is page 2!<p/>' 
+	. $_SESSION['post-data']['first-name'] . '
+	<form action="" method="post">
+	<input type="submit" name="review" id="next" value="Next" />
+	</form>';
+	echo $output;
+}
+
+// Display paypal button and let user proceed for credit card payment
+function sponsor_form_payment_credit() {
+	$output = '<p>This is page 3A!</p>
+
+	
+	';
+}
+
+// Display payment information for checks
+function sponsor_form_payment_check() {
+	$output = '<p>This is page 3B!<p>
+	<p>Please make checks for sponsorships payable to: Young Leadership Council
+	Where Ya’ Rack? c/o Young Leadership Council, PO Box 56909, New Orleans, LA 70156</p>
+	<p>We will be in touch as soon as we receive payment and can schedule your rack installation.</p>
+	<p>Thank you for your sponsorship!</p>
+	<form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">
+	<input type="submit" name="home" id="next" value="Home" />
+	</form>';
 	echo $output;
 }
 
@@ -68,8 +85,6 @@ function sf_shortcode() {
 	return ob_get_clean();
 }
 
-add_shortcode( 'wyr_sponsor_form', 'sf_shortcode' );
-
-//aksjfdk;ljsdfs;ljf
+add_shortcode('wyr_sponsor_form', 'sf_shortcode' );
 
 ?>
