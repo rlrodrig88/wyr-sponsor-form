@@ -1,7 +1,10 @@
-<? php
+<?php
 
-require('../fpdf/fpdf.php');  // MAKE SURE YOU HAVE THIS LINE
-
-
+$pdf = new FPDF();
+$pdf->AddPage();
+$pdf->SetFont('Arial','B',16);
+$pdf->Cell(40,10,$_SESSION['post-data']['first-name']);
+// Output File
+$pdf->Output('F' ,'./wp-content/plugins/wyr-sponsor-form/temp/new-sponsorship.pdf');
 
 ?>

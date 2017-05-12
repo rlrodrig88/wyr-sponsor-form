@@ -7,6 +7,9 @@ Version: 1.0
 Author: Ronnie Rodriguez
 */
 
+// PDF creator script
+require('fpdf/fpdf.php');  // MAKE SURE YOU HAVE THIS LINE
+
 // Set up session 
 add_action('init', 'start_session', 1);
 add_action('wp_logout', 'end_session');
@@ -60,14 +63,13 @@ function sponsor_form_review() {
 
 // Display paypal button and let user proceed for credit card payment
 function sponsor_form_payment_credit() {
-	$output = '<p>This is page 3A!</p>
-
-	
-	';
+	include 'create-pdf.php';
+	$output = '<p>This is page 3A!</p>';
 }
 
-// Display payment information for checks
+// Display payment and address information for checks
 function sponsor_form_payment_check() {
+	include 'create-pdf.php';	
 	$output = '<p>This is page 3B!<p>
 	<p>Please make checks for sponsorships payable to: Young Leadership Council
 	Where Ya’ Rack? c/o Young Leadership Council, PO Box 56909, New Orleans, LA 70156</p>
@@ -79,6 +81,7 @@ function sponsor_form_payment_check() {
 	echo $output;
 }
 
+// Create shortcode for the plugin
 function sf_shortcode() {
 	ob_start();
 	sponsor_form();
