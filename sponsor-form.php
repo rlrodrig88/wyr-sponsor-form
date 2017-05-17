@@ -10,6 +10,14 @@ Author: Ronnie Rodriguez
 // PDF creator script
 require('fpdf/fpdf.php');  // MAKE SURE YOU HAVE THIS LINE
 
+// Load stylesheet
+add_action( 'wp_enqueue_scripts', 'wpse_load_plugin_css' );
+
+function wpse_load_plugin_css() {
+    $plugin_url = plugin_dir_url( __FILE__ );
+    wp_enqueue_style( 'styles', $plugin_url . 'css/styles.css' );
+}
+
 // Set up session 
 add_action('init', 'start_session', 1);
 add_action('wp_logout', 'end_session');
@@ -33,16 +41,117 @@ function start_session() {
 function sponsor_form() {
 	$output = 
 	'<form action="" method="post">
-	<p>Your Name (required) <br/>
-	<input type="text" name="first-name" pattern="[a-zA-Z0-9 ]+" value="' . ( isset( $_POST["first-name"] ) ? esc_attr( $_POST["first-name"] ) : '' ) . '" size="40" /></p>
-	<input type="submit" name="form-submit" value="Next" >
-	</form>';
+  <h3>Sponsor Information</h3>
+  <div class="fields">
+    <div class="row">
+      <div class="field">
+       <div class="label">First Name </div>
+       <input id="name" class="entry" name="nameFirst" type="text" />
+      </div>
+      <div class="field">
+       <div class="label">Last Name </div>
+       <input id="name" class="entry" name="nameLast" type="text" />
+      </div>
+    </div>
+ </div>
+
+ <div class="row">
+    <div class="field">  
+     <div class="label">Business</div>
+     <input id="business" class="entry" name="business" type="text" />
+  </div>
+</div>
+
+<div class="row">
+  <div class="field"> 
+   <div class="label">Email</div> 
+   <input id="email" class="entry" name="email" type="text" />
+</div>
+
+<div class="field">  
+   <div class="label">Phone</div>   
+   <input id="phone" class="entry" name="phone" type="text" />
+</div>    
+</div>
+
+<h3>Rack Information</h3>
+<div class="row">
+   <div class="rack-item">
+      <img class="alignnone wp-image-251 size-thumbnail" src="http://www.whereyarack.org/wp-content/uploads/2017/03/Entergy_Audubon-150x150.jpg" alt="" width="150" height="150" /> 
+      <div class="quantity-field">
+         <div class="label">Hitch Post</div>
+         <div class="label">(secures 2 bikes)</div>         
+         Qty<input id="hitch-post-quantity" name="hitch-post-quantity" class="quantity" type="number" />
+      </div>
+   </div>   
+   <div class="rack-item">
+      <img class="alignnone wp-image-253 size-thumbnail" src="http://www.whereyarack.org/wp-content/uploads/2017/03/IMG_1258-150x150.jpg" alt="" width="150" height="150" />
+      <div class="quantity-field">     
+         <div class="label">Corral</div>
+         <div class="label">(secures 12 bikes)</div>          
+         Qty<input id="corral-quantity" name="corral-quantity" class="quantity" type="number" />
+      </div>
+   </div>   
+</div>
+   
+<h3>Rack Location</h3>
+<div class="row">
+   <div class="field">  
+      <div class="label">Address</div>  
+      <input id="location-address" name="location-address" class="entry" type="text" />
+   </div>
+   <div class="field">  
+      <div class="label">City</div>  
+      <input id="location-city" name="location-city" class="entry" type="text" />
+   </div>
+
+   <div class="row-small">
+      <div class="field">  
+         <div class="label">State</div>  
+         <input id="location-state" name="location-state" type="text" />
+      </div>
+      <div class="field">  
+         <div class="label">Zip Code</div>  
+         <input id="location-zip" name="location-zip" type="text" />
+      </div>  
+   </div>
+   <div class="label">Area Description</div>  
+   <textarea rows="4" id="location-area" name="area-description" class="entry" type="text"></textarea>
+</div>
+
+Public Land<input id="public" name="public-private" type="radio" value="public"/>
+Private Property<input id="private" name="public-private" type="radio" value="private"/>
+Property Owner (if private) <input id="property-owner" name="property-owner" type="text" />
+
+<h3>Plaque Information</h3>
+Description<input id="plaque-description" name="plaque-description" type="text" />
+Upload an Image <input id="image-upload" type="file" />
+
+<h3>Payment Information</h3>
+Credit Card<input id="credit-card" type="radio" name="payment-type" value="credit-card"/>
+Check<input id="check" type="radio" name="payment-type" value="check"/>
+
+<h3>Terms and Conditions</h3>
+<ol class="terms">
+  <li>If located on public property, the bicycle rack is donated to and becomes the property of the public entity or authority</li>
+  <li>My sponsorship lasts the lifespan of the bicycle rack, which is estimated to be approximately 10-20 years. If the bicycle rack is damaged, the Young Leadership Council and City are not responsible for its replacement.</li>
+  <li>While all efforts will be made to accommodate the sponsor\'s location preference, the exact placement of my sponsored bicycle rack will be at the discretion of the Young Leadership Council and the land owner.</li>
+  <li>My sponsored bicycle rack may need to be relocated temporarily or permanently due to construction, utility or circulation conflicts.</li>
+  <li>The dedication plaque shall not be used for commercial advertising on public property</li>
+  <li>I am responsible for carefully reviewing the dedication plaque design before I approve it, and if I wish to change the design after I have approved it and the order has been placed, I will pay for a new plaque.</li>
+  <li>If plaque and/or location data is not supplied to Where Ya\' Rack? within 3 months of request, Where Ya\' Rack? will use the known location or known plaque design and best fulfill the remainder of the sponsor\'s request.</li>
+</ol>
+<strong>I agree <input id="agree" name="agree" type="checkbox" /></strong>
+
+<input id="next" name="form-submit" type="submit" value="next" />
+
+</form>';
+	// Check for form submission
 	if(isset($_POST["form-submit"])) { 
 		// create an array of all $_POST variables
 		$_SESSION['post-data'] = $_POST;
 		// review user input
 		sponsor_form_review();
-		//sponsor_form_payment_check();
 	} else if(isset($_POST['review'])) { 
 		sponsor_form_payment_check();
 	} else {
@@ -53,8 +162,18 @@ function sponsor_form() {
 // Let user review the completed form
 function sponsor_form_review() {
 	$output = 
-	'<p>This is page 2!<p/>' 
-	. $_SESSION['post-data']['first-name'] . '
+	'<p>Please review and confirm your information:<p/>
+	<h2>Sponsor Information</h2>' 
+	. $_SESSION['post-data']['nameFirst'] . ' ' . $_SESSION['post-data']['nameLast'] . '</br>'
+	. $_SESSION['post-data']['business'] . '</br>' 
+	. $_SESSION['post-data']['email'] . '</br>' 
+	. $_SESSION['post-data']['phone'] . '</br>
+	<h2>Rack Information</h2>
+	<p>Hitch Post Racks: ' . $_SESSION['post-data']['hitch-post-quantity'] . '
+	<p>Corrals: ' . $_SESSION['post-data']['hitch-post-quantity'] . '	
+	<h2>Rack Location</h2>
+	<h2>Plaque Information</h2>
+	<h2>Payment Information</h2>
 	<form action="" method="post">
 	<input type="submit" name="review" id="next" value="Next" />
 	</form>';
