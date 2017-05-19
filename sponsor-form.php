@@ -43,21 +43,28 @@ function sponsor_form() {
     $errors = 0;
     $nameErr = '';
 	// Check for form submission
-	if(isset($_POST["form-submit"])) { 
+	if(isset($_POST["form-submit"])) {
 		// create an array of all $_POST variables
 		$_SESSION['post-data'] = $_POST;
 		// validate user input
-	    include 'form-validation.php';		
+	    include 'form-validation.php';
+	    // upload and validate plaque design file (if applicable)
+	    include 'file-validation.php';
 		// if entries are valid, let review user input
 		if ($errors === 0) {
             return sponsor_form_review();
 		}
-	} else if(isset($_POST['review'])) { 
-		sponsor_form_payment_check();
-	} 
+	// user input. has been reviewed, proceed to selected payment
+	} else if (isset($_POST["review-submit"])) {
+	    if($_SESSION['post-data']['payment-type'] === 'credit') {
+		    return sponsor_form_payment_credit();
+		} else if ($_SESSION['post-data']['payment-type'] === 'check') {
+		    return sponsor_form_payment_check();
+		} else echo "NO Payment Selected!";
+	}
 	
 $output = 
-	'<form action="" method="post">
+'<form action="" method="post" enctype="multipart/form-data">
   <h3>Sponsor Information</h3>
   <p>* required field</p>
   <div class="fields">
@@ -143,10 +150,10 @@ Property Owner (if private) <input id="property-owner" name="property-owner" typ
 
 <h3>Plaque Information</h3>
 Description<input id="plaque-description" name="plaque-description" type="text" />
-Upload an Image <input id="image-upload" type="file" />
+Upload an Image <input id="image-upload" name="fileToUpload" type="file" />
 
 <h3>Payment Information *</h3>
-Credit Card<input id="credit-card" type="radio" name="payment-type" value="credit-card"/>
+Credit Card<input id="credit" type="radio" name="payment-type" value="credit"/>
 Check<input id="check" type="radio" name="payment-type" value="check"/>
 
 <h3>Terms and Conditions</h3>
@@ -169,6 +176,7 @@ echo $output;
 
 // Let user review the completed form
 function sponsor_form_review() {
+
 	$output = 
 	'<p>Please review and confirm your information:<p/>
 	<h3>Sponsor Information</h3>' 
@@ -181,20 +189,26 @@ function sponsor_form_review() {
 	<p>Corrals: ' . $_SESSION['post-data']['hitch-post-quantity'] . '	
 	<h3>Rack Location</h3>
 	<h3>Plaque Information</h3>
-	<h3>Payment Information</h3>
+	<h3>Payment Information</h3>'
+    . $_SESSION['post-data']['payment-type'] . '</br>	
 	<form action="" method="post">
-	<input type="submit" name="review" id="next" value="Next" />
+	<input type="submit" name="review-submit" id="next" value="Next" />
 	</form>';
 	echo $output;
 }
 
 // Display paypal button and let user proceed for credit card payment
+// PDF is created in temp directory, ready to email
 function sponsor_form_payment_credit() {
 	include 'create-pdf.php';
 	$output = '<p>This is page 3A!</p>';
+	echo $output;
+	// after completed payment, return to thank you screen
+	// attach PDF and drawing file and sent email
 }
 
 // Display payment and address information for checks
+// PDF is created in temp directory, ready to email
 function sponsor_form_payment_check() {
 	include 'create-pdf.php';	
 	$output = '<p>This is page 3B!<p>
@@ -206,6 +220,7 @@ function sponsor_form_payment_check() {
 	<input type="submit" name="home" id="next" value="Home" />
 	</form>';
 	echo $output;
+	// attach PDF and drawing file and sent email
 }
 
 // Create shortcode for the plugin
