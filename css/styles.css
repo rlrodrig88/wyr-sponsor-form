@@ -20,6 +20,10 @@
 	margin-left: 20px;
 }
 
+.required {
+	color: red;
+}
+
 .row {
 	display: block;
 }
