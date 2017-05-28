@@ -1,12 +1,5 @@
 <?PHP
 
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-
   // Validate First Name
   if (empty($_SESSION['post-data']['nameFirst'])) {
     $nameFirstErr = 'First Name is required';
@@ -74,7 +67,7 @@ function test_input($data) {
   }
   // Check for aggreement to terms and conditions
   if (empty($_SESSION['post-data']['agree'])) {
-    $agreeErr = 'Please agree to terms and conditions';
+    $agreeErr = 'Please agree to the terms and conditions';
     $errors++;
   }
 ?>

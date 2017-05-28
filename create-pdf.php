@@ -17,13 +17,13 @@ class PDF extends FPDF {
 	    // Line break
 	    $this->Ln(20);
 	}
-
 	function Footer()
 	{
 	    // Arial bold 15
 	    $this->SetFont('Arial','',12);
 	    // Title
-	    $this->Cell(0,10,"Date goes here",0,0,'C');
+	    $date = date('Y/m/d H:i:s');
+	    $this->Cell(0,10,$date,0,0,'C');
 	    // Line break
 	    $this->Ln(20);
 	}
@@ -72,7 +72,7 @@ $pdf->Cell(10,7,$_SESSION['post-data']['corral-quantity'],'B',1,'C');
 $pdf->Ln(10);
 // Rack Location	
 $pdf->SetFont('Arial','B',16);
-$pdf->Cell(0,10,"Rack Location:",0,1,'C');
+$pdf->Cell(0,10,"Rack Quantities:",0,1,'C');
 $pdf->SetFont('Arial','B',12);	
 $pdf->Cell(40,7,"Address: ",0,0);	
 $pdf->SetFont('Arial','',12);
@@ -108,8 +108,21 @@ $pdf->SetFont('Arial','B',12);
 $pdf->Cell(40,7,"Payment Type: ",0,0);	
 $pdf->SetFont('Arial','',12);
 $pdf->Cell(20,7,$_SESSION['post-data']['payment-type'],'B',1);	
-$pdf->Ln(10);
+$pdf->Ln(30);
 // Output File
 $pdf->Output('F' ,'./wp-content/plugins/wyr-sponsor-form/temp/new-sponsorship.pdf');
+
+// Email completed sponsor form
+$to = "rlrodrig88@gmail.com";
+$subject = "New WYR Sponsorship!";
+$message = $_SESSION['post-data']['nameFirst'] . " " . $_SESSION['post-data']['nameLast'] . " has decided to sponsor a rack!";
+// array of all uploaded files
+$files = scandir('./wp-content/plugins/wyr-sponsor-form/temp/');
+// create an array of attachments with pathnames 
+$attachments = array();
+foreach($files as $value) {
+	array_push($attachments, './wp-content/plugins/wyr-sponsor-form/temp/' . $value);
+}
+wp_mail($to, $subject, $message, '', $attachments);
 
 ?>
