@@ -5,6 +5,13 @@
  Template:     twentytwelve
  Version:      1.0.0
 */
+
+.section {
+	font-size:1.2em;
+	font-weight:bold;
+	margin-top:15px;
+	margin-bottom:0px;
+}
 .menu-toggle {
 	font-size: 16px;
 }
@@ -13,11 +20,27 @@
 	font-size:  0.8em;
 	list-style: decimal;
 }
-
+.quantity-field {
+    width: 100%;
+    margin-top: 20px;
+}
 .quantity {
-	width:	40px;
-	text-align: center;
-	margin-left: 20px;
+    margin-top: 30px;
+    display: flex;
+    margin-left: 5%;	
+}
+
+.quantity-label {
+    margin: 0px;
+    margin-top: 6px;
+    margin-left: 31%;
+    font-weight:bold;
+}
+
+.quantity-entry {
+    width: 35px;
+    text-align: center;
+    margin-left: 13%;
 }
 
 .required {
@@ -40,13 +63,26 @@
 
 .field-label {
 	margin: 0px;
+	margin-top:6px;
 	margin-left:7.5%;
 }
 
+.small-text {
+	font-size:0.8em;
+}
 .entry {
-	width: 90%;
-    margin-left: 2.5%;
+	width:95%;
 	font-size: 16px;
+}
+
+.radio-field {
+	display:flex;
+	margin-top:7px;
+}
+
+.radio-entry {
+    margin-top: 5px;
+    margin-left: 20px;
 }
 
 #location-state {
@@ -57,9 +93,13 @@
 	width: 75px;
 }
 
+#image-upload {
+	margin-top:7px;
+}
+
 .rack-item {
     display: flex;
-    width: 300px;
+    width: 265px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;

@@ -78,77 +78,73 @@ function sponsor_form() {
 	
     $output = 
     '<form action="" method="post" enctype="multipart/form-data">
-      <h3>Sponsor Information</h3>
-      <p>* required field</p>
-      <div class="fields">
-        <div class="row">
-          <div class="field">
-           <div class="field-label">First Name * <span class="required">'. $nameFirstErr . '</span></div>
-           <input id="name" class="entry" name="nameFirst" type="text" value="' . $_SESSION['post-data']['nameFirst'] . '"/>
-          </div>
-          <div class="field">
-           <div class="field-label">Last Name * <span class="required">'. $nameLastErr . '</span></div>
-           <input id="name" class="entry" name="nameLast" type="text" value="' . $_SESSION['post-data']['nameLast'] . '"/>
-          </div>
+    <p>* required field</p>
+    <div class="section">Sponsor Information</div>
+    <div class="row">
+        <div class="field">
+            <div class="field-label">First Name * <span class="required">'. $nameFirstErr . '</span></div>
+            <input id="name" class="entry" name="nameFirst" type="text" value="' . $_SESSION['post-data']['nameFirst'] . '"/>
         </div>
-     </div>
-    
-     <div class="row">
+        <div class="field">
+             <div class="field-label">Last Name * <span class="required">'. $nameLastErr . '</span></div>
+             <input id="name" class="entry" name="nameLast" type="text" value="' . $_SESSION['post-data']['nameLast'] . '"/>
+        </div>
+    </div>
+    <div class="row">
         <div class="field">  
-         <div class="field-label">Business</div>
-         <input id="business" class="entry" name="business" type="text" value="' . $_SESSION['post-data']['business'] . '"/>
-      </div>
+        <div class="field-label">Business</div>
+        <input id="business" class="entry" name="business" type="text" value="' . $_SESSION['post-data']['business'] . '"/>
     </div>
-    
     <div class="row">
-      <div class="field"> 
-       <div class="field-label">Email * <span class="required">'. $emailErr . '</span></div> 
-       <input id="email" class="entry" name="email" type="text" value="' . $_SESSION['post-data']['email'] . '"/>
+        <div class="field"> 
+            <div class="field-label">Email * <span class="required">'. $emailErr . '</span></div> 
+            <input id="email" class="entry" name="email" type="text" value="' . $_SESSION['post-data']['email'] . '"/>
+        </div>
+        <div class="field">  
+            <div class="field-label">Phone</div>   
+            <input id="phone" class="entry" name="phone" type="text" value="' . $_SESSION['post-data']['phone'] . '"/>
+        </div>    
     </div>
     
-    <div class="field">  
-       <div class="field-label">Phone</div>   
-       <input id="phone" class="entry" name="phone" type="text" value="' . $_SESSION['post-data']['phone'] . '"/>
-    </div>    
-    </div>
-    
-    <h3>Rack Information *</h3><span class="required">'. $rackErr . '</span>
+    <div class="section">Rack Information *</div><span class="required">'. $rackErr . '</span>
     <div class="row">
-       <div class="rack-item">
-          <img class="alignnone wp-image-251 size-thumbnail" src="http://www.whereyarack.org/wp-content/uploads/2017/03/Entergy_Audubon-150x150.jpg" alt="" width="150" height="150" /> 
-          <div class="quantity-field">
-             <div class="field-label">Hitch Post</div>
-             <div class="field-label">(secures 2 bikes)</div>         
-             Qty<input id="hitch-post-quantity" name="hitch-post-quantity" class="quantity" type="number" value="' . $_SESSION['post-data']['hitch-post-quantity'] . '"/>
-          </div>
-       </div>   
-       <div class="rack-item">
-          <img class="alignnone wp-image-253 size-thumbnail" src="http://www.whereyarack.org/wp-content/uploads/2017/03/IMG_1258-150x150.jpg" alt="" width="150" height="150" />
-          <div class="quantity-field">     
-             <div class="field-label">Corral</div>
-             <div class="field-label">(secures 12 bikes)</div>          
-             Qty<input id="corral-quantity" name="corral-quantity" class="quantity" type="number" value="' . $_SESSION['post-data']['corral-quantity'] . '"/>
-          </div>
-       </div>   
+        <div class="rack-item">
+            <img class="alignnone wp-image-251 size-thumbnail" src="http://www.whereyarack.org/wp-content/uploads/2017/03/Entergy_Audubon-150x150.jpg" alt="" width="150" height="150" /> 
+            <div class="quantity-field">
+                <div class="quantity-label">Hitch Post</div>
+                <div class="quantity-label small-text">(2 bikes)</div> 
+                <div class="quantity">
+                    <div class="field-label">Qty</div>
+                    <input id="hitch-post-quantity" name="hitch-post-quantity" class="quantity-entry" type="number" value="' . $_SESSION['post-data']['hitch-post-quantity'] . '"/>
+                </div>
+            </div>
+        </div>   
+        <div class="rack-item">
+            <img class="alignnone wp-image-253 size-thumbnail" src="http://www.whereyarack.org/wp-content/uploads/2017/03/IMG_1258-150x150.jpg" alt="" width="150" height="150" />
+            <div class="quantity-field">     
+                <div class="quantity-label">Corral</div>
+                <div class="quantity-label small-text">(12 bikes)</div>
+                <div class="quantity">
+                    <div class="field-label">Qty</div>
+                    <input id="corral-quantity" name="corral-quantity" class="quantity-entry" type="number" value="' . $_SESSION['post-data']['corral-quantity'] . '"/>
+                </div>
+            </div>
+        </div>   
     </div>
        
-    <h3>Rack Location</h3>
+    <div class="section">Rack Location</div>
     <div class="row">
-       <div class="field">  
-          <div class="field-label">Address * <span class="required">'. $locationAddressErr . '</span></div>  
-          <input id="location-address" name="location-address" class="entry" type="text" value="' . $_SESSION['post-data']['location-address'] . '"/>
-       </div>
-       <div class="field">  
-          <div class="field-label">City * <span class="required">'. $locationCityErr . '</span></div>  
-          <input id="location-city" name="location-city" class="entry" type="text" value="' . $_SESSION['post-data']['location-city'] . '"/>
-       </div>
-    
-       <div class="row">
-          <div class="field">  
-             <div class="field-label">State * <span class="required">'. $locationStateErr . '</span></div>' .
-             
-           // <input id="location-state" name="location-state" type="text" value="' . $_SESSION['post-data']['location-state'] . '"/>
-             '<select id="location-state" name="location-state" placeholder="LA" value="' . $_SESSION['post-data']['location-state'] . '" >
+        <div class="field">  
+            <div class="field-label">Address * <span class="required">'. $locationAddressErr . '</span></div>  
+            <input id="location-address" name="location-address" class="entry" type="text" value="' . $_SESSION['post-data']['location-address'] . '"/>
+        </div>
+        <div class="field">  
+            <div class="field-label">City * <span class="required">'. $locationCityErr . '</span></div>  
+            <input id="location-city" name="location-city" class="entry" type="text" value="' . $_SESSION['post-data']['location-city'] . '"/>
+        </div>
+        <div class="field">  
+            <div class="field-label">State * <span class="required">'. $locationStateErr . '</span></div>' . '
+            <select id="location-state" name="location-state" class="entry" selected="LA" value="' . $_SESSION['post-data']['location-state'] . '" >
             	<option value="AL">AL</option>
             	<option value="AK">AK</option>
             	<option value="AZ">AZ</option>
@@ -167,7 +163,7 @@ function sponsor_form() {
             	<option value="IA">IA</option>
             	<option value="KS">KS</option>
             	<option value="KY">KY</option>
-            	<option value="LA">LA</option>
+            	<option value="LA" selected="selected">LA</option>
             	<option value="ME">ME</option>
             	<option value="MD">MD</option>
             	<option value="MA">MA</option>
@@ -201,41 +197,66 @@ function sponsor_form() {
             	<option value="WI">WI</option>
             	<option value="WY">WY</option>
             </select>
-             
-             
-          </div>
-          <div class="field">  
-             <div class="field-label">Zip Code * <span class="required">'. $locationZipErr . '</span></div>  
-             <input id="location-zip" name="location-zip" type="text" value="' . $_SESSION['post-data']['location-zip'] . '"/>
-          </div>  
-       </div>
-       <div class="field-label">Area Description</div>  
-       <textarea rows="4" id="location-area" name="area-description" class="entry" type="text" value="' . $_SESSION['post-data']['area-description'] . '"></textarea>
+        </div>
+        <div class="field">  
+            <div class="field-label">Zip Code * <span class="required">'. $locationZipErr . '</span></div>  
+            <input id="location-zip" name="location-zip" class="entry" type="text" value="' . $_SESSION['post-data']['location-zip'] . '"/>
+        </div>  
     </div>
+    <div class="field">
+        <div class="field-label">Area Description</div>  
+        <textarea rows="4" id="location-area" name="area-description" class="entry" type="text" value="' . $_SESSION['post-data']['area-description'] . '"></textarea>
+    </div>    
     <span class="required">'. $propertyTypeErr . '</span>
-    Public Land * <input id="public" name="public-private" type="radio" value="Public"/>
-    Private Property * <input id="private" name="public-private" type="radio" value="Private" />
-    <div>Property Owner (if private) <input id="property-owner" name="property-owner" type="text" value="' . $_SESSION['post-data']['property-owner'] . '"/></div>
     
-    <h3>Plaque Information</h3>
-    Description<input id="plaque-description" name="plaque-description" type="text" value="' . $_SESSION['post-data']['plaque-description'] . '"/>
-    Upload an Image <input id="image-upload" name="fileToUpload" type="file" />
-    <span class="required">'. $fileUploadErr . '</span>
+    <div class="field-label">
+        <div class="radio-field">
+            <div>Public Land * </div>
+            <input id="public" name="public-private" class="radio-entry" type="radio" value="Public"/>
+        </div>
+        <div class="radio-field">
+            <div>Private Property * </div>
+            <input id="private" name="public-private" class="radio-entry" type="radio" value="Private" />
+        </div>
+    </div>  
+    <div class="field">
+        <div class="field-label">Property Owner (if private)</div>
+        <input id="property-owner" name="property-owner" class="entry" type="text" value="' . $_SESSION['post-data']['property-owner'] . '"/>
+    </div>    
     
-    <h3>Payment Information * </h3>
-    Credit Card<input id="credit" type="radio" name="payment-type" value="credit"/>
-    Check<input id="check" type="radio" name="payment-type" value="check"/></br>
+    <div class="section">Plaque Information</div>
+    <div class="field">
+        <div class="field-label">Description</div>
+        <textarea rows="3" id="plaque-description" name="plaque-description" class="entry" type="text" value="' . $_SESSION['post-data']['plaque-description'] . '"></textarea>
+    </div>
+    <div class="field">
+        <div class="field-label small-text">If you have an image that you would like to incorporate into the plaque design, please attach it here:</div>
+        <input id="image-upload" name="fileToUpload" class="entry" type="file" />
+        <span class="required">'. $fileUploadErr . '</span>
+    </div>
+    
+    <div class="section">Payment Information * </div>
+    <div class="field-label">
+        <div class="radio-field">
+            <div>Credit Card</div>
+            <input id="credit" name="payment-type" type="radio" class="radio-entry" type="radio" value="Credit"/>
+        </div>
+        <div class="radio-field">
+            <div>Check</div>
+            <input id="check" name="payment-type" type="radio" class="radio-entry" type="radio" value="Check"/>
+        </div>    
+    </div>
     <span class="required">'. $paymentTypeErr . '</span>
     
-    <h3>Terms and Conditions</h3>
+    <div class="section">Terms and Conditions</div>
     <ol class="terms">
-      <li>If located on public property, the bicycle rack is donated to and becomes the property of the public entity or authority</li>
-      <li>My sponsorship lasts the lifespan of the bicycle rack, which is estimated to be approximately 10-20 years. If the bicycle rack is damaged, the Young Leadership Council and City are not responsible for its replacement.</li>
-      <li>While all efforts will be made to accommodate the sponsor\'s location preference, the exact placement of my sponsored bicycle rack will be at the discretion of the Young Leadership Council and the land owner.</li>
-      <li>My sponsored bicycle rack may need to be relocated temporarily or permanently due to construction, utility or circulation conflicts.</li>
-      <li>The dedication plaque shall not be used for commercial advertising on public property</li>
-      <li>I am responsible for carefully reviewing the dedication plaque design before I approve it, and if I wish to change the design after I have approved it and the order has been placed, I will pay for a new plaque.</li>
-      <li>If plaque and/or location data is not supplied to Where Ya\' Rack? within 3 months of request, Where Ya\' Rack? will use the known location or known plaque design and best fulfill the remainder of the sponsor\'s request.</li>
+        <li>If located on public property, the bicycle rack is donated to and becomes the property of the public entity or authority</li>
+        <li>My sponsorship lasts the lifespan of the bicycle rack, which is estimated to be approximately 10-20 years. If the bicycle rack is damaged, the Young Leadership Council and City are not responsible for its replacement.</li>
+        <li>While all efforts will be made to accommodate the sponsor\'s location preference, the exact placement of my sponsored bicycle rack will be at the discretion of the Young Leadership Council and the land owner.</li>
+        <li>My sponsored bicycle rack may need to be relocated temporarily or permanently due to construction, utility or circulation conflicts.</li>
+        <li>The dedication plaque shall not be used for commercial advertising on public property</li>
+        <li>I am responsible for carefully reviewing the dedication plaque design before I approve it, and if I wish to change the design after I have approved it and the order has been placed, I will pay for a new plaque.</li>
+        <li>If plaque and/or location data is not supplied to Where Ya\' Rack? within 3 months of request, Where Ya\' Rack? will use the known location or known plaque design and best fulfill the remainder of the sponsor\'s request.</li>
     </ol>
     <strong>I agree *<input id="agree" name="agree" type="checkbox" /></strong>
     <span class="required">'. $agreeErr . '</span>
@@ -249,23 +270,23 @@ function sponsor_form() {
 function sponsor_form_review() {
 	$output = 
 	'<h2>Please review and confirm your information:<h2>
-	<h3>Sponsor Information</h3>' 
+	<div class="section">Sponsor Information</div>' 
 	. $_SESSION['post-data']['nameFirst'] . ' ' . $_SESSION['post-data']['nameLast'] . '</br>'
 	. $_SESSION['post-data']['business'] . '</br>' 
 	. $_SESSION['post-data']['email'] . '</br>' 
 	. $_SESSION['post-data']['phone'] . '</br>
-	<h3>Rack Information</h3>
+	<div class="section">Rack Information</div>
 	<p>Hitch Post Racks: ' . $_SESSION['post-data']['hitch-post-quantity'] . '
 	<p>Corrals: ' . $_SESSION['post-data']['corral-quantity'] . '	
-	<h3>Rack Location</h3>'
+	<div class="section">Rack Location</div>'
 	. $_SESSION['post-data']['location-address'] .'</br>'
 	. $_SESSION['post-data']['location-state'] .  ' ' . $_SESSION['post-data']['location-city'] . ' ' . $_SESSION['post-data']['location-zip'] . '</br>'
 	. $_SESSION['post-data']['area-description'] .'</br>'
 	. $_SESSION['post-data']['public-private'] .' Property</br>	
-	<h3>Plaque Information</h3>'
+	<div class="section">Plaque Information</div>'
 	. $_SESSION['post-data']['plaque-description'] .'</br>
 	<p>Uploaded Files:  ' . basename( $_FILES["fileToUpload"]["name"]) . '</p>
-	<h3>Payment Information</h3>'
+	<div>Payment Information</div>'
     . $_SESSION['post-data']['payment-type'] . '</br></br>	
 	<form action="" method="post">
 	<input class="nav-button" type="button" onclick="window.history.back()" value="Back" />
