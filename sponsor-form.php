@@ -81,26 +81,27 @@ function sponsor_form() {
     <p>* required field</p>
     <div class="section">Sponsor Information</div>
     <div class="row">
-        <div class="field">
+        <div class="field" id="nameFirst-field">
             <div class="field-label">First Name * <span class="required">'. $nameFirstErr . '</span></div>
-            <input id="name" class="entry" name="nameFirst" type="text" value="' . $_SESSION['post-data']['nameFirst'] . '"/>
+            <input id="nameFirst" class="entry" name="nameFirst" type="text" value="' . $_SESSION['post-data']['nameFirst'] . '"/>
         </div>
-        <div class="field">
+        <div class="field" id="nameLast-field">
              <div class="field-label">Last Name * <span class="required">'. $nameLastErr . '</span></div>
-             <input id="name" class="entry" name="nameLast" type="text" value="' . $_SESSION['post-data']['nameLast'] . '"/>
+             <input id="nameLast" class="entry" name="nameLast" type="text" value="' . $_SESSION['post-data']['nameLast'] . '"/>
         </div>
     </div>
     <div class="row">
-        <div class="field">  
-        <div class="field-label">Business</div>
-        <input id="business" class="entry" name="business" type="text" value="' . $_SESSION['post-data']['business'] . '"/>
+        <div class="field" id="business-field">  
+            <div class="field-label">Business</div>
+            <input id="business" class="entry" name="business" type="text" value="' . $_SESSION['post-data']['business'] . '"/>
+        </div>
     </div>
-    <div class="row">
-        <div class="field"> 
+    <div class="row">    
+        <div class="field" id="email-field"> 
             <div class="field-label">Email * <span class="required">'. $emailErr . '</span></div> 
             <input id="email" class="entry" name="email" type="text" value="' . $_SESSION['post-data']['email'] . '"/>
         </div>
-        <div class="field">  
+        <div class="field" id="phone-field">  
             <div class="field-label">Phone</div>   
             <input id="phone" class="entry" name="phone" type="text" value="' . $_SESSION['post-data']['phone'] . '"/>
         </div>    
@@ -134,15 +135,17 @@ function sponsor_form() {
        
     <div class="section">Rack Location</div>
     <div class="row">
-        <div class="field">  
+        <div class="field" id="address-field">  
             <div class="field-label">Address * <span class="required">'. $locationAddressErr . '</span></div>  
             <input id="location-address" name="location-address" class="entry" type="text" value="' . $_SESSION['post-data']['location-address'] . '"/>
         </div>
-        <div class="field">  
+    </div>
+    <div class="row">    
+        <div class="field" id="city-field">  
             <div class="field-label">City * <span class="required">'. $locationCityErr . '</span></div>  
             <input id="location-city" name="location-city" class="entry" type="text" value="' . $_SESSION['post-data']['location-city'] . '"/>
         </div>
-        <div class="field">  
+        <div class="field" id="state-field">  
             <div class="field-label">State * <span class="required">'. $locationStateErr . '</span></div>' . '
             <select id="location-state" name="location-state" class="entry" selected="LA" value="' . $_SESSION['post-data']['location-state'] . '" >
             	<option value="AL">AL</option>
@@ -198,54 +201,66 @@ function sponsor_form() {
             	<option value="WY">WY</option>
             </select>
         </div>
-        <div class="field">  
+        <div class="field" id="zip-field">  
             <div class="field-label">Zip Code * <span class="required">'. $locationZipErr . '</span></div>  
             <input id="location-zip" name="location-zip" class="entry" type="text" value="' . $_SESSION['post-data']['location-zip'] . '"/>
         </div>  
     </div>
-    <div class="field">
-        <div class="field-label">Area Description</div>  
-        <textarea rows="4" id="location-area" name="area-description" class="entry" type="text" value="' . $_SESSION['post-data']['area-description'] . '"></textarea>
-    </div>    
-    <span class="required">'. $propertyTypeErr . '</span>
-    
-    <div class="field-label">
-        <div class="radio-field">
-            <div>Public Land * </div>
-            <input id="public" name="public-private" class="radio-entry" type="radio" value="Public"/>
-        </div>
-        <div class="radio-field">
-            <div>Private Property * </div>
-            <input id="private" name="public-private" class="radio-entry" type="radio" value="Private" />
-        </div>
-    </div>  
-    <div class="field">
-        <div class="field-label">Property Owner (if private)</div>
-        <input id="property-owner" name="property-owner" class="entry" type="text" value="' . $_SESSION['post-data']['property-owner'] . '"/>
-    </div>    
+    <div class="row">
+        <div class="field">
+            <div class="field-label">Area Description</div>  
+            <textarea rows="3" id="location-area" name="area-description" class="entry" type="text" value="' . $_SESSION['post-data']['area-description'] . '"></textarea>
+        </div>    
+        <span class="required">'. $propertyTypeErr . '</span>
+    </div>
+    <div class="row">
+        <div class="field-label">
+            <div class="radio-field">
+                <div>Public Land * </div>
+                <input id="public" name="public-private" class="radio-entry" type="radio" value="Public"/>
+            </div>
+            <div class="radio-field">
+                <div>Private Property * </div>
+                <input id="private" name="public-private" class="radio-entry" type="radio" value="Private" />
+            </div>
+        </div> 
+    </div>
+    <div class="row">    
+        <div class="field" id="property-owner-field">
+            <div class="field-label">Property Owner (if private)</div>
+            <input id="property-owner" name="property-owner" class="entry" type="text" value="' . $_SESSION['post-data']['property-owner'] . '"/>
+        </div>    
+    </div>
     
     <div class="section">Plaque Information</div>
-    <div class="field">
-        <div class="field-label">Description</div>
-        <textarea rows="3" id="plaque-description" name="plaque-description" class="entry" type="text" value="' . $_SESSION['post-data']['plaque-description'] . '"></textarea>
+    <div class="row">
+        <div class="field">
+            <div class="field-label">Description</div>
+            <textarea rows="3" id="plaque-description" name="plaque-description" class="entry" type="text" value="' . $_SESSION['post-data']['plaque-description'] . '"></textarea>
+        </div>
     </div>
-    <div class="field">
-        <div class="field-label small-text">If you have an image that you would like to incorporate into the plaque design, please attach it here:</div>
-        <input id="image-upload" name="fileToUpload" class="entry" type="file" />
-        <span class="required">'. $fileUploadErr . '</span>
+    <div class="row">
+        <div class="field">
+            <div class="field-label small-text">If you have an image that you would like to incorporate into the plaque design, please attach it here:</div>
+            <input id="image-upload" name="fileToUpload" class="entry" type="file" />
+            <span class="required">'. $fileUploadErr . '</span>
+        </div>
     </div>
     
     <div class="section">Payment Information * </div>
-    <div class="field-label">
-        <div class="radio-field">
-            <div>Credit Card</div>
-            <input id="credit" name="payment-type" type="radio" class="radio-entry" type="radio" value="Credit"/>
+    <div class="row">
+        <div class="field-label">
+            <div class="radio-field">
+                <div>Credit Card</div>
+                <input id="credit" name="payment-type" type="radio" class="radio-entry" type="radio" value="Credit"/>
+            </div>
+            <div class="radio-field">
+                <div>Check</div>
+                <input id="check" name="payment-type" type="radio" class="radio-entry" type="radio" value="Check"/>
+            </div>    
         </div>
-        <div class="radio-field">
-            <div>Check</div>
-            <input id="check" name="payment-type" type="radio" class="radio-entry" type="radio" value="Check"/>
-        </div>    
     </div>
+    
     <span class="required">'. $paymentTypeErr . '</span>
     
     <div class="section">Terms and Conditions</div>

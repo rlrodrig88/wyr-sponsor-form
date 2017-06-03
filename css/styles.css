@@ -1,11 +1,3 @@
-/*
- Theme Name:   Twenty Twelve Child Theme
- Description:  A child theme of the Twenty Twelve default WordPress theme
- Author:       Ronnie Rodriguez
- Template:     twentytwelve
- Version:      1.0.0
-*/
-
 .section {
 	font-size:1.2em;
 	font-weight:bold;
@@ -64,12 +56,13 @@
 .field-label {
 	margin: 0px;
 	margin-top:6px;
-	margin-left:7.5%;
+	margin-left:20px;
 }
 
 .small-text {
 	font-size:0.8em;
 }
+
 .entry {
 	width:95%;
 	font-size: 16px;
@@ -86,7 +79,7 @@
 }
 
 #location-state {
-	width: 165px;
+	width: 65px;
 }
 
 #location-zip {
@@ -95,6 +88,7 @@
 
 #image-upload {
 	margin-top:7px;
+    font-size: 12px;
 }
 
 .rack-item {
@@ -113,4 +107,73 @@
 	-webkit-appearance: button;	
 	width:100px;
 	font-size: 16px;
+}
+
+/* For larger screens */
+@media (min-width: 900px) {
+.row {
+	display:flex;
+}
+
+.field-label {
+	display:flex;
+}
+	
+.field {
+	width:100%;
+}
+
+#nameFirst-field {
+	width:250px;
+	margin-right:20px;
+}
+
+#nameLast-field {
+	width:400px;
+}
+
+#business-field {
+	width:400px;
+	
+}
+#email-field {
+	width:300px;
+	margin-right:20px;
+}
+
+#phone-field {
+	width:150px;
+}
+
+#address-field {
+	width:450px;
+}
+
+#city-field {
+	width:300px;
+}
+
+#state-field {
+	width:100px;
+}
+
+#zip-field {
+	width:100px;
+}
+/*
+#property-owner-field {
+	width:70%;
+}
+*/
+.radio-field {
+	width:200px;
+}
+
+.rack-item {
+	margin-left: 35px;
+    margin-right: 30px;
+}
+
+
+
 }
