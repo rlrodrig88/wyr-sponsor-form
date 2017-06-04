@@ -28,8 +28,8 @@ if(file_exists($_FILES["fileToUpload"]["tmp_name"])) {
         $errors++;
     }
     // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif" ) {
+    if($imageFileType != "jpg" && $imageFileType != "JPG" && $imageFileType != "png" && $imageFileType != "PNG" && $imageFileType != "jpeg"
+    && $imageFileType != "JPEG" && $imageFileType != "gif" && $imageFileType != "GIF") {
         $fileUploadErr = 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.';    
         $errors++;
     }

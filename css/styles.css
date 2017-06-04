@@ -73,13 +73,19 @@
 	margin-top:7px;
 }
 
+.radio-label {
+	margin-right:10px;
+}
+
 .radio-entry {
-    margin-top: 5px;
-    margin-left: 20px;
+    width:15px;
+    height:20px;
 }
 
 #location-state {
 	width: 65px;
+	font-size:16px;
+	
 }
 
 #location-zip {
@@ -109,8 +115,14 @@
 	font-size: 16px;
 }
 
+
 /* For larger screens */
 @media (min-width: 900px) {
+	
+#main {
+/*	width:625px;*/
+}
+
 .row {
 	display:flex;
 }
@@ -151,6 +163,7 @@
 
 #city-field {
 	width:300px;
+	margin-right:20px;
 }
 
 #state-field {
@@ -158,13 +171,13 @@
 }
 
 #zip-field {
-	width:100px;
+	width:125px;
 }
-/*
+
 #property-owner-field {
-	width:70%;
+	width:450px;
 }
-*/
+
 .radio-field {
 	width:200px;
 }

@@ -7,13 +7,13 @@ Version: 1.0
 Author: Ronnie Rodriguez
 */
 
-// PDF creator script
-require('fpdf/fpdf.php');  // MAKE SURE YOU HAVE THIS LINE
+// Load PDF creator script
+require('fpdf/fpdf.php'); 
 
-// Load stylesheet
-add_action( 'wp_enqueue_scripts', 'wpse_load_plugin_css' );
+// Load plugin stylesheet
+add_action( 'wp_enqueue_scripts', 'load_plugin_css', 50 );
 
-function wpse_load_plugin_css() {
+function load_plugin_css() {
     $plugin_url = plugin_dir_url( __FILE__ );
     wp_enqueue_style( 'styles', $plugin_url . 'css/styles.css' );
 }
@@ -67,7 +67,7 @@ function sponsor_form() {
 		if ($errors == 0) {
             return sponsor_form_review();
 		}
-	// user input. has been approved, proceed to selected payment
+	// user input has been approved, proceed to selected payment
 	} else if (isset($_POST["review-submit"])) {
 	    if($_SESSION['post-data']['payment-type'] === 'credit') {
 		    return sponsor_form_payment_credit();
@@ -77,7 +77,8 @@ function sponsor_form() {
 	}
 	
     $output = 
-    '<form action="" method="post" enctype="multipart/form-data">
+    '<div id="main">
+    <form action="" method="post" enctype="multipart/form-data">
     <p>* required field</p>
     <div class="section">Sponsor Information</div>
     <div class="row">
@@ -136,7 +137,7 @@ function sponsor_form() {
     <div class="section">Rack Location</div>
     <div class="row">
         <div class="field" id="address-field">  
-            <div class="field-label">Address * <span class="required">'. $locationAddressErr . '</span></div>  
+            <div class="radio-label">Address * <span class="required">'. $locationAddressErr . '</span></div>  
             <input id="location-address" name="location-address" class="entry" type="text" value="' . $_SESSION['post-data']['location-address'] . '"/>
         </div>
     </div>
@@ -207,20 +208,20 @@ function sponsor_form() {
         </div>  
     </div>
     <div class="row">
-        <div class="field">
+        <div class="field full-width">
             <div class="field-label">Area Description</div>  
-            <textarea rows="3" id="location-area" name="area-description" class="entry" type="text" value="' . $_SESSION['post-data']['area-description'] . '"></textarea>
+            <textarea rows="3" id="location-area" name="area-description" class="entry" type="text">' . $_SESSION['post-data']['area-description'] . '</textarea>
         </div>    
         <span class="required">'. $propertyTypeErr . '</span>
     </div>
     <div class="row">
         <div class="field-label">
             <div class="radio-field">
-                <div>Public Land * </div>
+                <div class="radio-label">Public Land * </div>
                 <input id="public" name="public-private" class="radio-entry" type="radio" value="Public"/>
             </div>
             <div class="radio-field">
-                <div>Private Property * </div>
+                <div class="radio-label">Private Property * </div>
                 <input id="private" name="public-private" class="radio-entry" type="radio" value="Private" />
             </div>
         </div> 
@@ -234,9 +235,9 @@ function sponsor_form() {
     
     <div class="section">Plaque Information</div>
     <div class="row">
-        <div class="field">
+        <div class="field full-width">
             <div class="field-label">Description</div>
-            <textarea rows="3" id="plaque-description" name="plaque-description" class="entry" type="text" value="' . $_SESSION['post-data']['plaque-description'] . '"></textarea>
+            <textarea rows="3" id="plaque-description" name="plaque-description" class="entry" type="text">' . $_SESSION['post-data']['plaque-description'] . '</textarea>
         </div>
     </div>
     <div class="row">
@@ -251,29 +252,34 @@ function sponsor_form() {
     <div class="row">
         <div class="field-label">
             <div class="radio-field">
-                <div>Credit Card</div>
-                <input id="credit" name="payment-type" type="radio" class="radio-entry" type="radio" value="Credit"/>
+                <div class="radio-label">Credit Card</div>
+                <input id="credit" name="payment-type" type="radio" class="radio-entry" type="radio" value="credit"/>
             </div>
             <div class="radio-field">
-                <div>Check</div>
-                <input id="check" name="payment-type" type="radio" class="radio-entry" type="radio" value="Check"/>
+                <div class="radio-label">Check</div>
+                <input id="check" name="payment-type" type="radio" class="radio-entry" type="radio" value="check"/>
             </div>    
         </div>
     </div>
     
     <span class="required">'. $paymentTypeErr . '</span>
     
-    <div class="section">Terms and Conditions</div>
-    <ol class="terms">
-        <li>If located on public property, the bicycle rack is donated to and becomes the property of the public entity or authority</li>
-        <li>My sponsorship lasts the lifespan of the bicycle rack, which is estimated to be approximately 10-20 years. If the bicycle rack is damaged, the Young Leadership Council and City are not responsible for its replacement.</li>
-        <li>While all efforts will be made to accommodate the sponsor\'s location preference, the exact placement of my sponsored bicycle rack will be at the discretion of the Young Leadership Council and the land owner.</li>
-        <li>My sponsored bicycle rack may need to be relocated temporarily or permanently due to construction, utility or circulation conflicts.</li>
-        <li>The dedication plaque shall not be used for commercial advertising on public property</li>
-        <li>I am responsible for carefully reviewing the dedication plaque design before I approve it, and if I wish to change the design after I have approved it and the order has been placed, I will pay for a new plaque.</li>
-        <li>If plaque and/or location data is not supplied to Where Ya\' Rack? within 3 months of request, Where Ya\' Rack? will use the known location or known plaque design and best fulfill the remainder of the sponsor\'s request.</li>
-    </ol>
-    <strong>I agree *<input id="agree" name="agree" type="checkbox" /></strong>
+    <div class="full-width">
+        <div class="section">Terms and Conditions</div>
+        <ol class="terms">
+            <li>If located on public property, the bicycle rack is donated to and becomes the property of the public entity or authority</li>
+            <li>My sponsorship lasts the lifespan of the bicycle rack, which is estimated to be approximately 10-20 years. If the bicycle rack is damaged, the Young Leadership Council and City are not responsible for its replacement.</li>
+            <li>While all efforts will be made to accommodate the sponsor\'s location preference, the exact placement of my sponsored bicycle rack will be at the discretion of the Young Leadership Council and the land owner.</li>
+            <li>My sponsored bicycle rack may need to be relocated temporarily or permanently due to construction, utility or circulation conflicts.</li>
+            <li>The dedication plaque shall not be used for commercial advertising on public property</li>
+            <li>I am responsible for carefully reviewing the dedication plaque design before I approve it, and if I wish to change the design after I have approved it and the order has been placed, I will pay for a new plaque.</li>
+            <li>If plaque and/or location data is not supplied to Where Ya\' Rack? within 3 months of request, Where Ya\' Rack? will use the known location or known plaque design and best fulfill the remainder of the sponsor\'s request.</li>
+        </ol>
+    </div>
+    <div class="radio-field">
+        <div class="radio-label"><strong>I agree *</strong></div>
+        <input id="agree" class="radio-entry" name="agree" type="checkbox" />
+    </div>
     <span class="required">'. $agreeErr . '</span>
     </br></br>
     <input class="nav-button" id="next" name="form-submit" type="submit" value="Next" />
@@ -306,7 +312,8 @@ function sponsor_form_review() {
 	<form action="" method="post">
 	<input class="nav-button" type="button" onclick="window.history.back()" value="Back" />
 	<input class="nav-button" type="submit" name="review-submit" id="next" value="Submit" />
-	</form>';
+	</form>
+	</div>';
 	echo $output;
 }
 
@@ -314,7 +321,7 @@ function sponsor_form_review() {
 // PDF is created in temp directory, ready to email
 function sponsor_form_payment_credit() {
     $total = $_SESSION['post-data']['hitch-post-quantity'] * 300 + $_SESSION['post-data']['corral-quantity'] * 2500;
-	$output = '<p>This is page 3A!</p> 
+	$output = ' 
 	<p>Your total is: &#160 &#160 <strong>$' . $total . '.00</strong</p>
 	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
     <input name="business" type="hidden" value="natasha@ylcnola.org" />
@@ -335,7 +342,7 @@ function sponsor_form_payment_credit() {
 // PDF is created in temp directory, ready to email
 function sponsor_form_payment_check() {
     $total = $_SESSION['post-data']['hitch-post-quantity'] * 300 + $_SESSION['post-data']['corral-quantity'] * 2500;
-	$output = '<p>This is page 3B!<p>
+	$output = '
 	<p>Your total is: &#160 &#160 <strong>$' . $total . '.00</strong><p>
 	<p>Please make checks for sponsorships payable to: </br>
 	Where Ya’ Rack? c/o Young Leadership Council, PO Box 56909</br>

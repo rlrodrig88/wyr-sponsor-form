@@ -1,5 +1,7 @@
 <?php
 
+// see www.FDPF.org for library docs 
+
 class PDF extends FPDF {
 	// Page header
 	function Header()
@@ -91,7 +93,7 @@ $pdf->Cell(20,7,$_SESSION['post-data']['public-private'],'B',1);
 $pdf->SetFont('Arial','B',12);	
 $pdf->Cell(40,7,'Property Owner: ',0,0);
 $pdf->SetFont('Arial','',12);
-$pdf->Cell(40,7,$_SESSION['post-data']['property-owner'],'B',1);		
+$pdf->Cell(40,5,$_SESSION['post-data']['property-owner'],'B',1);		
 $pdf->Ln(10);
 // Plaque Information
 $pdf->SetFont('Arial','B',16);
@@ -99,7 +101,7 @@ $pdf->Cell(0,10,"Plaque Information:",0,1,'C');
 $pdf->SetFont('Arial','B',12);
 $pdf->Cell(40,7,"Description: ",0,0);	
 $pdf->SetFont('Arial','',12);
-$pdf->MultiCell(0,7,$_SESSION['post-data']['plaque-description'],'B',1);
+$pdf->MultiCell(0,5,$_SESSION['post-data']['plaque-description'],'B',1);
 $pdf->Ln(10);
 // Payment Information
 $pdf->SetFont('Arial','B',16);
@@ -108,7 +110,7 @@ $pdf->SetFont('Arial','B',12);
 $pdf->Cell(40,7,"Payment Type: ",0,0);	
 $pdf->SetFont('Arial','',12);
 $pdf->Cell(20,7,$_SESSION['post-data']['payment-type'],'B',1);	
-$pdf->Ln(30);
+$pdf->Ln(10);
 // Output File
 $pdf->Output('F' ,'./wp-content/plugins/wyr-sponsor-form/temp/new-sponsorship.pdf');
 
