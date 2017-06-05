@@ -18,7 +18,7 @@
   } 
   // Validate Email
   if (empty($_SESSION['post-data']['email'])) {
-    $emailErr = 'Email is required';
+    $emailErr = ' Email is required';
     $errors++;
   }  else if (!filter_var($_SESSION['post-data']['email'], FILTER_VALIDATE_EMAIL)) {
     $emailErr = "Please use valid email address"; 
@@ -31,12 +31,12 @@
   }
   // Check for address
   if (empty($_SESSION['post-data']['location-address'])) {
-    $locationAddressErr = 'Address is required';
+    $locationAddressErr = ' Address is required';
     $errors++;
   }  
   // Validate city
   if (empty($_SESSION['post-data']['location-city'])) {
-    $locationCityErr = 'City is required';
+    $locationCityErr = ' City is required';
     $errors++;
   }  else if (!preg_match("/^[a-zA-Z ]*$/",$_SESSION['post-data']['location-city'])) {
     $locationCityErr = "Only letters and white space allowed";
@@ -49,7 +49,7 @@
   } 
   // Validate zip code
   if (empty($_SESSION['post-data']['location-zip'])) {
-    $locationZipErr = 'Zip Code is required';
+    $locationZipErr = ' Zip Code is required';
     $errors++;
   } else if(preg_match('/^[0-9]{5}$/', $_SESSION['post-data']['location-zip']) == 0){
     $locationZipErr = 'Please enter valid zip code';

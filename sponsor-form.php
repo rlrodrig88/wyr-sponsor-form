@@ -2,7 +2,7 @@
 /*
 Plugin Name: WYR Sponsor Form Plugin
 Plugin URI: https://github.com/rlrodrig88/wyr-sponsor-form
-Description: Sponsorship form for bike racks.  Creates and sends a PDF of the completed form via email for notification.  Allows for mailed checks or credit card payment.
+Description: Sponsorship form for bike racks.  Support image file upload.  Creates and sends a PDF of the completed form along with uploaded image via email to project team.  Allows for mailed checks or credit card payment.
 Version: 1.0
 Author: Ronnie Rodriguez
 */
@@ -78,7 +78,7 @@ function sponsor_form() {
 	
     $output = 
     '<div id="main">
-    <form action="" method="post" enctype="multipart/form-data">
+    <form id="sponnsor-form" action="" method="post" enctype="multipart/form-data">
     <p>* required field</p>
     <div class="section">Sponsor Information</div>
     <div class="row">
@@ -111,7 +111,7 @@ function sponsor_form() {
     <div class="section">Rack Information *</div><span class="required">'. $rackErr . '</span>
     <div class="row">
         <div class="rack-item">
-            <img class="alignnone wp-image-251 size-thumbnail" src="http://www.whereyarack.org/wp-content/uploads/2017/03/Entergy_Audubon-150x150.jpg" alt="" width="150" height="150" /> 
+            <div><img src="http://www.whereyarack.org/wp-content/uploads/2017/03/Entergy_Audubon-150x150.jpg" alt="" width="150" height="150" /></div>
             <div class="quantity-field">
                 <div class="quantity-label">Hitch Post</div>
                 <div class="quantity-label small-text">(2 bikes)</div> 
@@ -122,7 +122,7 @@ function sponsor_form() {
             </div>
         </div>   
         <div class="rack-item">
-            <img class="alignnone wp-image-253 size-thumbnail" src="http://www.whereyarack.org/wp-content/uploads/2017/03/IMG_1258-150x150.jpg" alt="" width="150" height="150" />
+            <div><img class="alignnone wp-image-253 size-thumbnail" src="http://www.whereyarack.org/wp-content/uploads/2017/03/IMG_1258-150x150.jpg" alt="" width="150" height="150" /></div>
             <div class="quantity-field">     
                 <div class="quantity-label">Corral</div>
                 <div class="quantity-label small-text">(12 bikes)</div>
@@ -137,7 +137,7 @@ function sponsor_form() {
     <div class="section">Rack Location</div>
     <div class="row">
         <div class="field" id="address-field">  
-            <div class="radio-label">Address * <span class="required">'. $locationAddressErr . '</span></div>  
+            <div class="field-label">Address * <span class="required">'. $locationAddressErr . '</span></div>  
             <input id="location-address" name="location-address" class="entry" type="text" value="' . $_SESSION['post-data']['location-address'] . '"/>
         </div>
     </div>
@@ -212,17 +212,17 @@ function sponsor_form() {
             <div class="field-label">Area Description</div>  
             <textarea rows="3" id="location-area" name="area-description" class="entry" type="text">' . $_SESSION['post-data']['area-description'] . '</textarea>
         </div>    
-        <span class="required">'. $propertyTypeErr . '</span>
     </div>
+        <span class="required">'. $propertyTypeErr . '</span>
     <div class="row">
         <div class="field-label">
             <div class="radio-field">
                 <div class="radio-label">Public Land * </div>
-                <input id="public" name="public-private" class="radio-entry" type="radio" value="Public"/>
+                <input id="public" name="public-private" class="radio-entry" type="radio" value="public"/>
             </div>
             <div class="radio-field">
                 <div class="radio-label">Private Property * </div>
-                <input id="private" name="public-private" class="radio-entry" type="radio" value="Private" />
+                <input id="private" name="public-private" class="radio-entry" type="radio" value="private" />
             </div>
         </div> 
     </div>
@@ -242,7 +242,7 @@ function sponsor_form() {
     </div>
     <div class="row">
         <div class="field">
-            <div class="field-label small-text">If you have an image that you would like to incorporate into the plaque design, please attach it here:</div>
+            <div class="field-label small-text">If you have an image that you would like to incorporate into the plaque design, please attach it here.</br>Larger files will take longer to upload.</div>
             <input id="image-upload" name="fileToUpload" class="entry" type="file" />
             <span class="required">'. $fileUploadErr . '</span>
         </div>
@@ -290,7 +290,7 @@ function sponsor_form() {
 // Let user review the completed form
 function sponsor_form_review() {
 	$output = 
-	'<h2>Please review and confirm your information:<h2>
+	'<h2>Please review and confirm your information:</h2>
 	<div class="section">Sponsor Information</div>' 
 	. $_SESSION['post-data']['nameFirst'] . ' ' . $_SESSION['post-data']['nameLast'] . '</br>'
 	. $_SESSION['post-data']['business'] . '</br>' 
@@ -307,7 +307,7 @@ function sponsor_form_review() {
 	<div class="section">Plaque Information</div>'
 	. $_SESSION['post-data']['plaque-description'] .'</br>
 	<p>Uploaded Files:  ' . basename( $_FILES["fileToUpload"]["name"]) . '</p>
-	<div>Payment Information</div>'
+	<div class="section">Payment Information</div>'
     . $_SESSION['post-data']['payment-type'] . '</br></br>	
 	<form action="" method="post">
 	<input class="nav-button" type="button" onclick="window.history.back()" value="Back" />
