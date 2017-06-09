@@ -31,7 +31,7 @@
 .quantity-entry {
     width: 35px;
     text-align: center;
-    margin-left: 13%;
+    margin-left: 8%;
 }
 
 .required {
@@ -177,12 +177,9 @@
 	width:200px;
 }
 
-.small-text {
-	margin-right:30px;
-}
-
 .terms {
 	width:600px;
+	margin-right:30px;
 }
 
 }

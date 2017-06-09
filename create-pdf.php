@@ -114,8 +114,8 @@ $pdf->Ln(10);
 // Output File
 $pdf->Output('F' ,'./wp-content/plugins/wyr-sponsor-form/temp/new-sponsorship.pdf');
 
-// Email completed sponsor form
-$to = "rlrodrig88@gmail.com";
+// Email completed sponsor form to WYR
+$to = "ronnie.rodriguez@pbfenergy.com";
 $subject = "New WYR Sponsorship!";
 $message = $_SESSION['post-data']['nameFirst'] . " " . $_SESSION['post-data']['nameLast'] . " has decided to sponsor a rack!";
 // array of all uploaded files
@@ -127,4 +127,20 @@ foreach($files as $value) {
 }
 wp_mail($to, $subject, $message, '', $attachments);
 
+// Send a confirmation email back to the sponsor
+// If the sponsor selects 'private property', attach the liability release for them to sign 
+add_filter( 'wp_mail_content_type', 'set_content_type' );
+function set_content_type( $content_type ) {
+    return 'text/html';
+}
+$to = $_SESSION['post-data']['email'];
+$subject = "Where Ya' Rack Sponsorship!";
+include 'confirmation-email.php';
+$message = get_email_body($_SESSION['post-data']['public-private']);
+if ($_SESSION['post-data']['public-private'] == 'private') {
+	$attachment = './wp-content/plugins/wyr-sponsor-form/Donation_Agreement.pdf';
+};
+wp_mail($to, $subject, $message, '', $attachment);
+
+remove_filter('wp_mail_content_type', 'text/html');
 ?>

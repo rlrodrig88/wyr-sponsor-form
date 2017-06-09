@@ -74,11 +74,12 @@ function sponsor_form() {
 		} else if ($_SESSION['post-data']['payment-type'] === 'check') {
 		    return sponsor_form_payment_check();
 		} else echo "No Payment Selected!";
-	}
+	} 
+	
 	
     $output = 
     '<div id="main">
-    <form id="sponnsor-form" action="" method="post" enctype="multipart/form-data">
+    <form id="sponsor-form" action="" method="post" enctype="multipart/form-data">
     <p>* required field</p>
     <div class="section">Sponsor Information</div>
     <div class="row">
@@ -283,7 +284,13 @@ function sponsor_form() {
     <span class="required">'. $agreeErr . '</span>
     </br></br>
     <input class="nav-button" id="next" name="form-submit" type="submit" value="Next" />
+    </form>
+    
+    <form id="pdf-email" action="" method="post" enctype="multipart/form-data">
+    <button type="submit" name="pdf-email">PDF and Email</button>
     </form>';
+    
+    
     echo $output;
 }
 
