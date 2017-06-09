@@ -138,7 +138,7 @@ $subject = "Where Ya' Rack Sponsorship!";
 include 'confirmation-email.php';
 $message = get_email_body($_SESSION['post-data']['public-private']);
 if ($_SESSION['post-data']['public-private'] == 'private') {
-	$attachment = './wp-content/plugins/wyr-sponsor-form/Donation_Agreement.pdf';
+	$attachment = './wp-content/plugins/wyr-sponsor-form/documents/Donation_Agreement.pdf';
 };
 wp_mail($to, $subject, $message, '', $attachment);
 

@@ -118,7 +118,7 @@ function sponsor_form() {
                 <div class="quantity-label small-text">(2 bikes)</div> 
                 <div class="quantity">
                     <div class="field-label">Qty</div>
-                    <input id="hitch-post-quantity" name="hitch-post-quantity" class="quantity-entry" type="number" value="' . $_SESSION['post-data']['hitch-post-quantity'] . '"/>
+                    <input id="hitch-post-quantity" name="hitch-post-quantity" class="quantity-entry" type="number" min="0" value="' . $_SESSION['post-data']['hitch-post-quantity'] . '"/>
                 </div>
             </div>
         </div>   
@@ -129,7 +129,7 @@ function sponsor_form() {
                 <div class="quantity-label small-text">(12 bikes)</div>
                 <div class="quantity">
                     <div class="field-label">Qty</div>
-                    <input id="corral-quantity" name="corral-quantity" class="quantity-entry" type="number" value="' . $_SESSION['post-data']['corral-quantity'] . '"/>
+                    <input id="corral-quantity" name="corral-quantity" class="quantity-entry" type="number" min="0" value="' . $_SESSION['post-data']['corral-quantity'] . '"/>
                 </div>
             </div>
         </div>   
@@ -219,11 +219,11 @@ function sponsor_form() {
         <div class="field-label">
             <div class="radio-field">
                 <div class="radio-label">Public Land * </div>
-                <input id="public" name="public-private" class="radio-entry" type="radio" value="public"/>
+                <input id="public" name="public-private" class="radio-entry" type="radio" value="public"' . (($_SESSION["post-data"]["public-private"] == "public") ? " checked='checked'" : "") . '/>
             </div>
             <div class="radio-field">
                 <div class="radio-label">Private Property * </div>
-                <input id="private" name="public-private" class="radio-entry" type="radio" value="private" />
+                <input id="private" name="public-private" class="radio-entry" type="radio" value="private"' . (($_SESSION["post-data"]["public-private"] == "private") ? " checked='checked'" : "") . ' />
             </div>
         </div> 
     </div>
@@ -254,11 +254,11 @@ function sponsor_form() {
         <div class="field-label">
             <div class="radio-field">
                 <div class="radio-label">Credit Card</div>
-                <input id="credit" name="payment-type" type="radio" class="radio-entry" type="radio" value="credit"/>
+                <input id="credit" name="payment-type" type="radio" class="radio-entry" type="radio" value="credit" ' . (($_SESSION["post-data"]["payment-type"] == "credit") ? " checked='checked'" : "") . '/>
             </div>
             <div class="radio-field">
                 <div class="radio-label">Check</div>
-                <input id="check" name="payment-type" type="radio" class="radio-entry" type="radio" value="check"/>
+                <input id="check" name="payment-type" type="radio" class="radio-entry" type="radio" value="check" ' . (($_SESSION["post-data"]["payment-type"] == "check") ? " checked='checked'" : "") . '/>
             </div>    
         </div>
     </div>
@@ -284,10 +284,6 @@ function sponsor_form() {
     <span class="required">'. $agreeErr . '</span>
     </br></br>
     <input class="nav-button" id="next" name="form-submit" type="submit" value="Next" />
-    </form>
-    
-    <form id="pdf-email" action="" method="post" enctype="multipart/form-data">
-    <button type="submit" name="pdf-email">PDF and Email</button>
     </form>';
     
     

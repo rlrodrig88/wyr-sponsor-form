@@ -32,7 +32,7 @@ function get_email_body($location) {
 			/* ========== Page Styles ========== */
 
 			#bodyCell{padding:10px;}
-			#templateContainer{width:620px;}
+			#templateContainer{width:100%;}
 
 			/**
 			* @tab Page
