@@ -85,7 +85,7 @@ $pdf->Cell(30,7,$_SESSION['post-data']['location-zip'],'B',1);
 $pdf->SetFont('Arial','B',12);	
 $pdf->Cell(40,7,"Area Description: ",0,0);	
 $pdf->SetFont('Arial','',12);
-$pdf->MultiCell(0,7,$_SESSION['post-data']['area-description'],'B',1);
+$pdf->MultiCell(0,5,$_SESSION['post-data']['area-description'],'B',1);
 $pdf->SetFont('Arial','B',12);	
 $pdf->Cell(40,7,"Location Type: ",0,0);	
 $pdf->SetFont('Arial','',12);

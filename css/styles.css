@@ -3,15 +3,33 @@
 	font-weight:bold;
 	margin-top:15px;
 	margin-bottom:0px;
+	color: #1981d1;
 }
+
+legend {
+    margin-left: 5%;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: 1.2em;
+    font-weight: bold;	
+}
+.border {
+	margin-bottom: 12px;
+    border-radius: 7px;
+    border: gray;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: 2px 2px 4px #b2b0b0;;	
+}
+
+.group {
+	margin:12px;
+}
+
 .menu-toggle {
 	font-size: 16px;
 }
 
-.terms {
-	font-size:  0.8em;
-	list-style: decimal;
-}
 .quantity-field {
 	text-align: center;
     width: 110px;
@@ -58,6 +76,10 @@
 	margin-left:20px;
 }
 
+.fieldset {
+	word-wrap: none;
+}
+
 .small-text {
 	font-size:0.8em;
 }
@@ -67,14 +89,13 @@
 	font-size: 16px;
 }
 
+.radio-label {
+	margin-right:10px;
+}
+
 .radio-field {
 	display:flex;
 	margin-top:7px;
-}
-
-
-.radio-label {
-	margin-right:10px;
 }
 
 .radio-entry {
@@ -85,7 +106,6 @@
 #location-state {
 	width: 65px;
 	font-size:16px;
-	
 }
 
 #location-zip {
@@ -105,8 +125,9 @@
     margin-top: 30px;
 }
 
-.form-nav {
-	display: flex;
+.terms {
+	font-size:  0.8em;
+	list-style: decimal;
 }
 
 .nav-button {
@@ -131,12 +152,12 @@
 }
 
 #nameFirst-field {
-	width:250px;
+	width:35%;
 	margin-right:20px;
 }
 
 #nameLast-field {
-	width:400px;
+	width:60%;
 }
 
 #business-field {
@@ -166,7 +187,7 @@
 }
 
 #zip-field {
-	width:250px;
+	width:75px;
 }
 
 #property-owner-field {
@@ -178,7 +199,7 @@
 }
 
 .terms {
-	width:600px;
+	width:95%;
 	margin-right:30px;
 }
 
