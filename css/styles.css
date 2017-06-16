@@ -11,7 +11,8 @@ legend {
     padding-left: 2%;
     padding-right: 2%;
     font-size: 1.2em;
-    font-weight: bold;	
+    font-weight: bold;
+    word-wrap:none;
 }
 .border {
 	margin-bottom: 12px;
@@ -74,10 +75,6 @@ legend {
 	margin: 0px;
 	margin-top:6px;
 	margin-left:20px;
-}
-
-.fieldset {
-	word-wrap: none;
 }
 
 .small-text {
@@ -187,7 +184,7 @@ legend {
 }
 
 #zip-field {
-	width:75px;
+	width:100px;
 }
 
 #property-owner-field {
