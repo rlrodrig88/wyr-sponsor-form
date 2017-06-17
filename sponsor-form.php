@@ -19,16 +19,16 @@ function load_plugin_css() {
 }
 
 // Set up session 
-add_action('init', 'start_session', 1);
-add_action('wp_logout', 'end_session');
-add_action('wp_login', 'end_session');
-add_action('end_session_action', 'end_session');
+add_action('init', 'start_new_session', 1);
+add_action('wp_logout', 'end_current_session');
+add_action('wp_login', 'end_current_session');
+add_action('end_session_action', 'end_current_session');
 
-function end_session() {
+function end_current_session() {
 	session_destroy();
 }
 
-function start_session() {
+function start_new_session() {
 	if(!session_id()) {
 		session_start();
 	}
@@ -345,7 +345,7 @@ function sponsor_form_review() {
         <div class="group">'
         	. $_SESSION['post-data']['location-address'] .'</br>'
         	. $_SESSION['post-data']['location-city'] .  ', ' . $_SESSION['post-data']['location-state'] . ' ' . $_SESSION['post-data']['location-zip'] . '</br>'
-        	. (($_SESSION['post-data']['public-private'] = 'public') ? "Public Land" : "Private Property") .'</br>'	
+        	. (($_SESSION['post-data']['public-private'] == 'public') ? "Public Land" : "Private Property") .'</br>'	
         	. $_SESSION['post-data']['area-description'] .'</br>
         </div>
     </fieldset>

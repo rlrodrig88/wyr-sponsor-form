@@ -12,8 +12,9 @@ legend {
     padding-right: 2%;
     font-size: 1.2em;
     font-weight: bold;
-    word-wrap:none;
+    word-wrap:normal;
 }
+
 .border {
 	margin-bottom: 12px;
     border-radius: 7px;
